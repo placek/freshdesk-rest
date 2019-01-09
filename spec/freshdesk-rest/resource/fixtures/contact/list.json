@@ -1,0 +1,31 @@
+[
+  {
+    "active": false,
+    "address": null,
+    "company_id": null,
+    "view_all_tickets": null,
+    "description": null,
+    "email": "some+user@example.com",
+    "id": 2015007548012,
+    "job_title": null,
+    "language": "de",
+    "mobile": null,
+    "name": "some user",
+    "phone": null,
+    "time_zone": "Berlin",
+    "twitter_id": null,
+    "custom_fields": {
+      "profile_url": null,
+      "country": null,
+      "user_type": null
+    },
+    "tags": [],
+    "other_emails": [],
+    "facebook_id": null,
+    "created_at": "2019-01-09T12:20:59Z",
+    "updated_at": "2019-01-09T12:20:59Z",
+    "other_companies": [],
+    "unique_external_id": null,
+    "avatar": null
+  }
+]
