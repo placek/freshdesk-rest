@@ -1,0 +1,19 @@
+dist: trusty
+sudo: required
+
+language: ruby
+cache: bundler
+rvm:
+  - 2.3.7
+
+bundler_args: --without production
+
+script:
+  - bundle exec rspec spec
+
+notifications:
+  email: "placzynski.pawel@gmail.com"
+
+branches:
+  only:
+  - master
