@@ -36,7 +36,7 @@ end
 ### List of contacts filtered by a filed
 ```ruby
 resource = Freshdesk::Rest::Factory.contact_resource
-resource.list(params: { unique_external_id: '1234567890' }).each do |p|
+resource.list(params: { unique_external_id: '1234567890' }).each do |c|
   puts "#{c[:name]} #{c[:email]}"
 end
 ```
