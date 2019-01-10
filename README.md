@@ -11,15 +11,12 @@
 ### This is still a BETA!
 Some of the methods signatures could change. I aim to keep always backward compatibility, but until the first major version (1.x.x) is released, it's still in beta.
 
-Keep in mind that Phraseapp do not recommend to user the lists to retrieve all the items but to use the "#locale_download" instead. The limits of how many items per page are supported, has not been tested.
-
 ## Configuration
 ```ruby
 Freshdesk::Rest.configure do |config|
   config.api_key = ENV['FRESHDESK_API_KEY']
   config.domain = ENV['FRESHDESK_DOMAIN']
 end
-
 ```
 
 ## Usage
