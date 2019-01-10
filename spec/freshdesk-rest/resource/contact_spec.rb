@@ -1,30 +1,49 @@
 require_relative '../../../lib/freshdesk-rest/resource/contact'
-require_relative 'api_client_mock'
 
 RSpec.describe Freshdesk::Rest::Resource::Contact do
-  subject             { described_class.new(client: api) }
+  let(:service)       { described_class.new(client: api) }
   let(:resource_type) { described_class.to_s.split('::').last.downcase }
   let(:api)           { double('Api') }
+  before              { allow(JSON).to receive(:parse).and_return(result) }
+  let(:response)      { double }
+  let(:result)        { double }
 
-  it 'returns one project for the given id' do
-    allow(api).to receive(:get)
-      .with('/contacts/2015007548012')
-      .and_return(ApiClientMock.fixture(resource_type, 'get.json'))
-    project = subject.get(id: '2015007548012')
-    expect(project[:id]).to eq 2015007548012
-    expect(project[:name]).to eq 'some user'
-    expect(project[:email]).to eq 'some+user@example.com'
+  describe '#list' do
+    context 'without params'do
+      before  { allow(api).to receive(:get).with('/contacts').and_return(response) }
+      subject { service.list }
+
+      it { is_expected.to eq(result) }
+    end
+
+    context 'with params'do
+      before  { allow(api).to receive(:get).with('/contacts?unique_external_id=123123123').and_return(response) }
+      subject { service.list(params: { unique_external_id: '123123123' }) }
+
+      it { is_expected.to eq(result) }
+    end
   end
 
-  it 'returns a list of contacts updated after a date' do
-    allow(api).to receive(:get)
-      .with('/contacts')
-      .and_return(ApiClientMock.fixture(resource_type, 'list.json'))
-    expect(subject.list.count).to eq 1
+  describe '#get' do
+    before  { allow(api).to receive(:get).with('/contacts/2015007548012').and_return(response) }
+    subject { service.get(id: '2015007548012') }
+
+    it { is_expected.to eq(result) }
   end
 
-  it 'returns nothing when project does not exists' do
-    allow(api).to receive(:get).with('/contacts/non_existing_contact').and_return('[]')
-    expect(subject.get(id: 'non_existing_contact')).to be_empty
+  describe '#post' do
+    before     { allow(api).to receive(:post).with('/contacts', data).and_return(response) }
+    let(:data) { double }
+    subject    { service.post(data: data) }
+
+    it { is_expected.to eq(result) }
+  end
+
+  describe '#put' do
+    before     { allow(api).to receive(:put).with('/contacts/2015007548012', data).and_return(response) }
+    let(:data) { double }
+    subject    { service.put(id: '2015007548012', data: data) }
+
+    it { is_expected.to eq(result) }
   end
 end

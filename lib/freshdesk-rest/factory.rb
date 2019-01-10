@@ -11,6 +11,10 @@ module Freshdesk
           domain: Freshdesk::Rest.configuration.domain
         )
       end
+
+      def self.contact_resource
+        Freshdesk::Rest::Resource::Contact.new(client: api)
+      end
     end
   end
 end

@@ -14,8 +14,17 @@ module Freshdesk
         raise e
       end
 
-      def post(path)
-        resource(path).post.body
+      def post(path, data)
+        resource(path).post(data.to_json, content_type: 'application/json').body
+      end
+
+      def put(path, data)
+        resource(path).put(data.to_json, content_type: 'application/json').body
+      end
+
+      def delete(path)
+        resource(path).delete.body
+        '{}'
       end
 
       private
